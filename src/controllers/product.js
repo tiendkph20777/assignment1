@@ -6,7 +6,7 @@ dotenv.config();
 const productSchema = Joi.object({
     name: Joi.string().required(),
     price: Joi.number().required(),
-    description: Joi.string().required(),
+    description: Joi.string(),
 })
 export const getAll = async (req, res) => {
     try {
@@ -80,7 +80,7 @@ export const update = async (req, res) => {
         const product = await findOneAndUpdate({ _id: req.params.id }, req.body, {
             new: true,
         });
-        if (!products) {
+        if (!product) {
             res.status(404).json({
                 message: "Cap nhat san pham khong thanh cong "
             })
